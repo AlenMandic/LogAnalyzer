@@ -4,10 +4,11 @@
     <meta charset="UTF-8" />
     <title>Log analyzer</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="chart-icon.png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
-    <h1>Log analyzer</h1>
+    <h1>Log analyzer 📊</h1>
     <div class="intro-actions">
       <p></p>
         Upload a text log file ( or multiple logs ) to get detailed charts about
@@ -20,31 +21,27 @@
 
       <label for="chartType">Choose a chart type you like:</label>
       <select name="chartType" id="chartType">
-        <option value="bar" selected>Bar</option>
-        <option value="pie">Pie</option>
+        <option value="pie" selected>Pie</option>
+        <option value="bar">Bar</option>
         <option value="radar">Radar</option>
         <option value="doughnut">Doughnut</option>
         <option value="line">Line</option>
       </select>
       <br />
 
-      <input type="file" id="log-file" name="log-file" accept=".txt" multiple />
+      <label for="chartType">Upload NikaDisplay log files: ⬇️</label><input type="file" id="log-file" name="log-file" accept=".txt" multiple />
 
+      <h4 id="error-warning">🚫 ERROR: Incorrect file format or file type. <br>Only load in properly formatted NikaDisplay logs.</h4>
       <h3>Log analytics:</h3>
-      <h4 id="r-name">
+      <h3 id="r-name">
         Restaurant name, log date: Upload a log file or multiple files!
-      </h4>
+      </h3>
+      <h4 id="demo-example">⚠️ Displaying demo example graph!</h4>
       <p class="small-note" id="analytics"></p>
       <div class="chart-container">
         <canvas id="myChart"></canvas>
+        <!-- <a href="mailto:tbd@gmail.com?subject=Log%20Analiza%20vašeg%20restorana!&body=Najpopularnije%20kategorije%20pritisnute%20na%20vašem%20NikaDisplay%20uređaju!" class="mail">✉️ Pošalji mail</a> -->
       </div>
-      <p>TODO: Ostalo za napravit</p>
-      <ul>
-        <li>Prikazat raspon datuma kada se unosi više file-ova ( dovršit handleDate klasu...) <br>Trenutno se vidi samo jedan datum.</li>
-        <li>Raspodjela jezika: Koji jezici se najviše klikaju</li>
-        <li>Dodat exportiranje chart-slike na mail:to</li>
-        <li>Dodat error indikacije za korisnika</li>
-      </ul>
     </div>
     <script type="module" src="main.js"></script>
   </body>
