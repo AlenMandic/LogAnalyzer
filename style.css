@@ -1,0 +1,120 @@
+/* Reset some default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9fb;
+  color: #333;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* Title */
+h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Container for all content */
+.intro-actions {
+  background-color: #fff;
+  padding: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Paragraphs */
+.intro-actions p {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.small-note {
+  font-size: 0.95rem;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+/* Labels and selects */
+label {
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+select {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+/* File input */
+input[type="file"] {
+  margin-top: 10px;
+  padding: 8px;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  max-width: 100%;
+}
+
+/* Headers */
+h3 {
+  margin-top: 40px;
+  font-size: 1.5rem;
+  color: #34495e;
+}
+
+h4 {
+  font-size: 1.1rem;
+  margin-top: 10px;
+  color: #555;
+}
+
+/* Chart Container */
+.chart-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 30px auto 0;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  height: auto;
+}
+
+/* Responsive canvas */
+canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .intro-actions {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  select,
+  input[type="file"] {
+    width: 100%;
+  }
+}

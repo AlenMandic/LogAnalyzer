@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Log analyzer</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <h1>Log analyzer</h1>
+    <div class="intro-actions">
+      <p></p>
+        Upload a text log file ( or multiple logs ) to get detailed charts about
+        Nika restaurant clicks!
+      </p>
+      <p class="small-note">
+        NOTE: Only accepts text files of the proper format as per Nika Digitalna Rješenja!
+      </p>
+      <br />
+
+      <label for="chartType">Choose a chart type you like:</label>
+      <select name="chartType" id="chartType">
+        <option value="bar" selected>Bar</option>
+        <option value="pie">Pie</option>
+        <option value="radar">Radar</option>
+        <option value="doughnut">Doughnut</option>
+        <option value="line">Line</option>
+      </select>
+      <br />
+
+      <input type="file" id="log-file" name="log-file" accept=".txt" multiple />
+
+      <h3>Log analytics:</h3>
+      <h4 id="r-name">
+        Restaurant name, log date: Upload a log file or multiple files!
+      </h4>
+      <p class="small-note" id="analytics"></p>
+      <div class="chart-container">
+        <canvas id="myChart"></canvas>
+      </div>
+      <p>TODO: Ostalo za napravit</p>
+      <ul>
+        <li>Prikazat raspon datuma kada se unosi više file-ova ( dovršit handleDate klasu...) <br>Trenutno se vidi samo jedan datum.</li>
+        <li>Raspodjela jezika: Koji jezici se najviše klikaju</li>
+        <li>Dodat exportiranje chart-slike na mail:to</li>
+        <li>Dodat error indikacije za korisnika</li>
+      </ul>
+    </div>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
