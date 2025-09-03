@@ -1,11 +1,4 @@
-// Creating the actual chart and chart logic.
-const selectChartType = document.getElementById("chartType");
-
-selectChartType.addEventListener("change", handleSelectChange);
-
-function handleSelectChange(e) {
-  selectChartType.value = e.target.value;
-}
+import { renderNewChart } from "./utils.js";
 
 export const dummyData = {
   apple: 5,
@@ -18,6 +11,18 @@ export const dummyData = {
   tomato: 10,
 };
 
+// Creating the actual chart and chart logic.
+const selectChartType = document.getElementById("chartType");
+
+selectChartType.addEventListener("change", handleSelectChange);
+
+export function handleSelectChange(e) {
+  selectChartType.value = e.target.value;
+
+renderNewChart()
+
+}
+
 // class for exporting Chart.JS
 export class LogChart {
   constructor(data, canvas) {
@@ -26,31 +31,7 @@ export class LogChart {
   }
 
   renderLogChart() {
-    new Chart(this.canvas, {
-      type: selectChartType.value, // we can use: bar, pie, radar, doughnut, line
-      data: {
-        labels: Object.keys(this.data),
-        datasets: [
-          {
-            label: "Times Clicked",
-            data: Object.values(this.data),
-            backgroundColor: backgroundColorsDefault,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
-    });
-  }
-
-  displayDemoExample() {
-    new Chart(this.canvas, {
+    return new Chart(this.canvas, {
       type: selectChartType.value, // we can use: bar, pie, radar, doughnut, line
       data: {
         labels: Object.keys(this.data),

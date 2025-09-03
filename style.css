@@ -7,17 +7,25 @@
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9f9fb;
-  color: #333;
+  background: linear-gradient(90deg,rgb(217, 223, 225) 0%, rgb(213, 223, 217) 50%, rgb(221, 216, 169) 100%);
+  color: black;
   padding: 20px;
   line-height: 1.6;
 }
 
 h1 {
   font-size: 2.5rem;
-  color: #2c3e50;
+  color: black;
   text-align: center;
   margin-bottom: 10px;
+  margin-top: 50px;
+}
+
+.main-input {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #error-warning {
@@ -29,26 +37,37 @@ h1 {
 }
 
 .intro-actions {
-  background-color: #fff;
   padding: 20px;
-  max-width: 900px;
   margin: 0 auto;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  gap: 100px;
+  justify-content: center;
 }
 
 .intro-actions p {
   font-size: 1.1rem;
 }
 
+.text-part {
+max-width: 600px;
+line-height: 2;
+font-size: 22px;
+}
+
+.graph-part {
+  min-width: 800px;
+}
+
 .small-note {
   font-size: 0.95rem;
-  color: #888;
+  color: rgb(78, 78, 78);
 }
 
 label {
   display: block;
   font-weight: 600;
+  font-size: 19px;
 }
 
 select {
@@ -63,32 +82,38 @@ select {
 }
 
 input[type="file"] {
-  padding: 8px;
+  padding: 15px;
   background-color: #f1f1f1;
   border: 1px solid #ccc;
   border-radius: 6px;
   cursor: pointer;
   max-width: 100%;
+  font-size: 16px;
 }
 
 h3 {
   margin-top: 20px;
   font-size: 1.5rem;
-  color: #34495e;
+  color: black;
 }
 
 h4 {
   font-size: 1.1rem;
   margin-top: 10px;
-  color: #555;
+  color: black;
+}
+
+#graph-tip {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 .chart-container {
   width: 100%;
-  max-width: 800px;
-  margin: 30px auto 0;
+  max-width: 1000px;
   padding: 20px;
-  background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   height: auto;
@@ -99,8 +124,30 @@ canvas {
   height: auto !important;
 }
 
+.image-buttons {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 10%;
+  margin-top: 20px;
+}
+
+.image-buttons > img {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  border: solid 1.6px white;
+  padding: 10px;
+  cursor: pointer;
+  transition: transform 0.04s ease;
+}
+
+.image-buttons > img:active {
+  transform: scale(0.5) rotate(5deg);
+}
+
 /* responzivnost na 600px ili manje */
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .intro-actions {
     padding: 20px;
   }
@@ -113,4 +160,16 @@ canvas {
   input[type="file"] {
     width: 100%;
   }
+}
+
+@media (width <= 1000px) {
+
+.intro-actions {
+  flex-direction: column;
+ }
+
+ .graph-part {
+  margin-top: -50px;
+ }
+
 }

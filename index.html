@@ -4,12 +4,17 @@
     <meta charset="UTF-8" />
     <title>Log analyzer</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/x-icon" href="chart-icon.png">
+    <link rel="icon" type="image/x-icon" href="images/chart-icon.png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
     <h1>Log analyzer 📊</h1>
+      <div class="main-input">
+      <label for="chartType">Upload NikaDisplay log files: ➡️</label><input type="file" id="log-file" name="log-file" accept=".txt" multiple />
+      </div>
     <div class="intro-actions">
+      <div class="text-part">
+      <h3>Log analytics:</h3>        
       <p></p>
         Upload a text log file ( or multiple logs ) to get detailed charts about
         Nika restaurant clicks!
@@ -21,27 +26,33 @@
 
       <label for="chartType">Choose a chart type you like:</label>
       <select name="chartType" id="chartType">
-        <option value="pie" selected>Pie</option>
-        <option value="bar">Bar</option>
+        <option value="bar" selected>Bar</option>
+        <option value="pie">Pie</option>
         <option value="radar">Radar</option>
         <option value="doughnut">Doughnut</option>
         <option value="line">Line</option>
       </select>
       <br />
 
-      <label for="chartType">Upload NikaDisplay log files: ⬇️</label><input type="file" id="log-file" name="log-file" accept=".txt" multiple />
+      <h4 id="graph-tip">💭 TIP: Change chart style in real time using the Chart Type-menu or arrow-buttons</h4>  
 
       <h4 id="error-warning">🚫 ERROR: Incorrect file format or file type. <br>Only load in properly formatted NikaDisplay logs.</h4>
-      <h3>Log analytics:</h3>
+      <h5 class="small-note" id="analytics"></h5>
+      </div>
+      <div class="graph-part">
       <h3 id="r-name">
         Restaurant name, log date: Upload a log file or multiple files!
       </h3>
       <h4 id="demo-example">⚠️ Displaying demo example graph!</h4>
-      <p class="small-note" id="analytics"></p>
+        <div class="image-buttons">
+          <img src="/images/left-arrow.png" id="arrow-left">
+          <img src="/images/right-arrow.png" id="arrow-right">
+        </div>      
       <div class="chart-container">
         <canvas id="myChart"></canvas>
         <!-- <a href="mailto:tbd@gmail.com?subject=Log%20Analiza%20vašeg%20restorana!&body=Najpopularnije%20kategorije%20pritisnute%20na%20vašem%20NikaDisplay%20uređaju!" class="mail">✉️ Pošalji mail</a> -->
       </div>
+       </div>
     </div>
     <script type="module" src="main.js"></script>
   </body>
