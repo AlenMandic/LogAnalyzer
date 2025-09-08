@@ -1,9 +1,12 @@
-import { renderNewChart } from "./utils";
-import { ourLogChart } from "../types/types";
+import { renderNewChart } from "./utils.js";
+
+import { mainDataForChart } from "../types/types.js";
+import { dummyDataForChart } from "../types/types.js";
+import { ourCanvas } from "../types/types.js";
 
 declare const Chart: any;
 
-export const dummyData = {
+export const dummyData : dummyDataForChart = {
   apple: 5,
   banana: 7,
   strawberry: 2,
@@ -29,10 +32,10 @@ renderNewChart()
 // class for exporting Chart.JS
 export class LogChart {
 
-  data: ourLogChart["data"];
-  canvas: ourLogChart["ctx"];
+  data: mainDataForChart | dummyDataForChart;
+  canvas: ourCanvas;
 
-  constructor({ data, ctx} : ourLogChart) {
+  constructor(data: mainDataForChart | dummyDataForChart, ctx: CanvasRenderingContext2D) {
     this.data = data;
     this.canvas = ctx;
   }

@@ -1,11 +1,9 @@
-import { ourLogChart } from "../types/types";
+import { timesClicked } from "./main.js";
+import { ctx } from "./main.js";
+import { dummyData } from "./chart.js";
+import { LogChart } from "./chart.js";
 
-import { timesClicked } from "./main";
-import { ctx } from "./main";
-import { dummyData } from "./chart";
-import { LogChart } from "./chart";
-
-import { arrayOfDateStrings } from "../types/types";
+import { arrayOfDateStrings } from "../types/types.js";
 
 const selectChartType = document.getElementById("chartType") as HTMLSelectElement;
 const demoExampleElement = document.getElementById("demo-example");
@@ -26,8 +24,8 @@ export function handleDates(dateList : arrayOfDateStrings) {
   dateList.sort((a, b) => {
 
     const parseDate = (str: string) => {
-      const [day, month, year] = str.split(".").map(Number);
-      return new Date(year, month - 1, day);
+      const [day, month, year] = str.split(".").map(Number); // Turns "08.10.2025" into an array of strings(split), then numbers, as map returns an array: [8, 10, 2025]
+      return new Date(year, month - 1, day); // Creates a date object from [08, 10, 2025]. 8 is the "day" variable etc...
     }
     
     return parseDate(a).getTime() - parseDate(b).getTime();
@@ -77,7 +75,7 @@ export function renderNewChart() {
       return;
     } else {
       // Display chart logs from our data object timesClicked;
-      const resultChart = new LogChart({ data: { value: timesClicked }, ctx });
+      const resultChart = new LogChart(timesClicked, ctx);
   
       resultChart.destroyLogChart(); // Destroy any potentially existing instance of Chart/Canvas
       resultChart.renderLogChart();

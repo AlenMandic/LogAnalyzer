@@ -1,4 +1,5 @@
 // Main logic and string manipulation/extraction.
+import { mainDataForChart, ourCanvas } from "../types/types.js";
 
 const fileInput = document.getElementById("log-file");
 const demoExampleNote = document.getElementById("demo-example");
@@ -8,15 +9,15 @@ let restaurantName = document.getElementById("r-name");
 let resultArray = []; // Reset
 let dateArray = [];
 
-export let timesClicked;
-export const ctx = document.getElementById("myChart").getContext("2d");
+export let timesClicked : mainDataForChart;
+
+const chartCanvas = document.getElementById("myChart") as HTMLCanvasElement; // Returns a regular HTML element
+export const ctx : ourCanvas = chartCanvas.getContext("2d");
 
 import { LogChart } from "./chart.js"; // Chart logic from chart.js
 import { handleDates } from "./utils.js";
 import { handleString } from "./utils.js";
 import { dummyData } from "./chart.js";
-
-import { mainDataForChart } from "../types/types";
 
 errorWarning.style.display = "none";
 
@@ -24,10 +25,12 @@ fileInput.addEventListener("change", handleLogFile);
 
 // Display initial dummy graph
 const demoExample = new LogChart(dummyData, ctx);
-demoExample.renderLogChart(dummyData, ctx);
+demoExample.renderLogChart();
 
 function handleLogFile() {
-  const logFiles = fileInput.files;
+
+  const logElement = fileInput as HTMLInputElement;
+  const logFiles = logElement.files;
 
   dateArray = [];
   timesClicked = {};
@@ -51,7 +54,7 @@ function handleLogFile() {
         demoExampleNote.style.display = "none";
         errorWarning.style.display = "none";
 
-        const values = reader.result;
+        const values = reader.result as string;
 
         const amountOfEntries = values.split("bottun;"); // Every button which was clicked.
 
@@ -103,7 +106,7 @@ function handleLogFile() {
       }
     };
 
-    reader.onerror = () => {
+    reader.onerror = (error) => {
       demoExampleNote.style.display = "block";
 
       // handle errors on reading files
