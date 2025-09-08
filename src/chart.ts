@@ -1,10 +1,8 @@
 import { renderNewChart } from "./utils.js";
 
-import { mainDataForChart } from "../types/types.js";
-import { dummyDataForChart } from "../types/types.js";
-import { ourCanvas } from "../types/types.js";
+import { mainDataForChart, dummyDataForChart, ourCanvas } from "../types/types.js";
 
-declare const Chart: any;
+declare const Chart: any; // Beacuse i'm importing Chart.js library via CDN i don't have the type
 
 export const dummyData : dummyDataForChart = {
   apple: 5,
@@ -22,8 +20,8 @@ const selectChartType = document.getElementById("chartType") as HTMLSelectElemen
 
 selectChartType.addEventListener("change", handleSelectChange);
 
-export function handleSelectChange(e) {
-  selectChartType.value = e.target.value;
+export function handleSelectChange(e : Event) {
+selectChartType.value = e.target.value;
 
 renderNewChart()
 
@@ -35,7 +33,7 @@ export class LogChart {
   data: mainDataForChart | dummyDataForChart;
   canvas: ourCanvas;
 
-  constructor(data: mainDataForChart | dummyDataForChart, ctx: CanvasRenderingContext2D) {
+  constructor(data: mainDataForChart | dummyDataForChart, ctx: ourCanvas) {
     this.data = data;
     this.canvas = ctx;
   }

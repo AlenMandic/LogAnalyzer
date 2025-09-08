@@ -1,9 +1,5 @@
-import { timesClicked } from "./main.js";
-import { ctx } from "./main.js";
-import { dummyData } from "./chart.js";
-import { LogChart } from "./chart.js";
-
-import { arrayOfDateStrings } from "../types/types.js";
+import { timesClicked, ctx } from "./main.js";
+import { dummyData, LogChart } from "./chart.js";
 
 const selectChartType = document.getElementById("chartType") as HTMLSelectElement;
 const demoExampleElement = document.getElementById("demo-example");
@@ -11,7 +7,7 @@ const demoExampleElement = document.getElementById("demo-example");
 const arrowButtonLeft = document.getElementById("arrow-left");
 const arrowButtonRight = document.getElementById("arrow-right");
 
-const arrayOfOptions = [];
+const arrayOfOptions : Array<string> = [];
 let currentPosition = 0;
 
 for( let i = 0; i < (selectChartType).options.length; i++ ) {
@@ -19,13 +15,13 @@ for( let i = 0; i < (selectChartType).options.length; i++ ) {
 }
 
 // Sort dates from oldest to newest to get the date range for logs. Uses JS's built in sort algorithm...
-export function handleDates(dateList : arrayOfDateStrings) {
+export function handleDates(dateList : Array<string>) {
 
   dateList.sort((a, b) => {
 
     const parseDate = (str: string) => {
       const [day, month, year] = str.split(".").map(Number); // Turns "08.10.2025" into an array of strings(split), then numbers, as map returns an array: [8, 10, 2025]
-      return new Date(year, month - 1, day); // Creates a date object from [08, 10, 2025]. 8 is the "day" variable etc...
+      return new Date(year, month - 1, day); // Creates a date object from the variables: Destructured 8 into the variable "day", etc...
     }
     
     return parseDate(a).getTime() - parseDate(b).getTime();
@@ -46,6 +42,7 @@ export function handleArrowButtons(e : PointerEvent) {
   if (document.getElementById("arrow-right") === e.target) {
 
       if ( currentPosition >= arrayOfOptions.length - 1 ) currentPosition = -1;
+
       currentPosition += 1;
 
       selectChartType.value = arrayOfOptions[currentPosition]
@@ -55,6 +52,7 @@ export function handleArrowButtons(e : PointerEvent) {
   } else {
 
       if ( currentPosition <= 0 ) currentPosition = 5;
+
       currentPosition -= 1;
 
       selectChartType.value = arrayOfOptions[currentPosition]

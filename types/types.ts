@@ -1,5 +1,3 @@
-export type arrayOfDateStrings = Array<string>;
-
 export type mainDataForChart = number | {};
 
 export type dummyDataForChart = {
@@ -14,4 +12,3 @@ export type dummyDataForChart = {
 }
 
 export type ourCanvas = CanvasRenderingContext2D;
-
