@@ -16,6 +16,8 @@ import { handleDates } from "./utils.js";
 import { handleString } from "./utils.js";
 import { dummyData } from "./chart.js";
 
+import { mainDataForChart } from "../types/types";
+
 errorWarning.style.display = "none";
 
 fileInput.addEventListener("change", handleLogFile);

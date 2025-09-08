@@ -1,4 +1,7 @@
-import { renderNewChart } from "./utils.js";
+import { renderNewChart } from "./utils";
+import { ourLogChart } from "../types/types";
+
+declare const Chart: any;
 
 export const dummyData = {
   apple: 5,
@@ -12,7 +15,7 @@ export const dummyData = {
 };
 
 // Creating the actual chart and chart logic.
-const selectChartType = document.getElementById("chartType");
+const selectChartType = document.getElementById("chartType") as HTMLSelectElement;
 
 selectChartType.addEventListener("change", handleSelectChange);
 
@@ -25,9 +28,13 @@ renderNewChart()
 
 // class for exporting Chart.JS
 export class LogChart {
-  constructor(data, canvas) {
+
+  data: ourLogChart["data"];
+  canvas: ourLogChart["ctx"];
+
+  constructor({ data, ctx} : ourLogChart) {
     this.data = data;
-    this.canvas = canvas;
+    this.canvas = ctx;
   }
 
   renderLogChart() {

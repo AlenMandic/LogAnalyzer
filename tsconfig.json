@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "strict": false,               // turn on later
+    "noImplicitAny": false,        // turn on later
+    "allowJs": true,               // allows mixing .js and .ts
+    "checkJs": false,              // you can set true for gradual checks
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "outDir": "dist"
+  },
+  "include": ["**/*"],
+  "exclude": ["node_modules", "dist"]
+}

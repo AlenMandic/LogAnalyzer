@@ -1,9 +1,13 @@
-import { timesClicked } from "./main.js";
-import { ctx } from "./main.js";
-import { dummyData } from "./chart.js";
-import { LogChart } from "./chart.js";
+import { ourLogChart } from "../types/types";
 
-const selectChartType = document.getElementById("chartType");
+import { timesClicked } from "./main";
+import { ctx } from "./main";
+import { dummyData } from "./chart";
+import { LogChart } from "./chart";
+
+import { arrayOfDateStrings } from "../types/types";
+
+const selectChartType = document.getElementById("chartType") as HTMLSelectElement;
 const demoExampleElement = document.getElementById("demo-example");
 
 const arrowButtonLeft = document.getElementById("arrow-left");
@@ -12,30 +16,34 @@ const arrowButtonRight = document.getElementById("arrow-right");
 const arrayOfOptions = [];
 let currentPosition = 0;
 
-for( let i = 0; i < selectChartType.options.length; i++ ) {
+for( let i = 0; i < (selectChartType).options.length; i++ ) {
   arrayOfOptions.push(selectChartType.options[i].value);
 }
 
 // Sort dates from oldest to newest to get the date range for logs. Uses JS's built in sort algorithm...
-export function handleDates(dateList) {
+export function handleDates(dateList : arrayOfDateStrings) {
+
   dateList.sort((a, b) => {
-    let c = new Date(a);
-    let d = new Date(b);
-    return c - d;
+
+    const parseDate = (str: string) => {
+      const [day, month, year] = str.split(".").map(Number);
+      return new Date(year, month - 1, day);
+    }
+    
+    return parseDate(a).getTime() - parseDate(b).getTime();
   });
 }
 
 // Handle string operation, extracts every button which was clicked.
-export function handleString(entry) {
-  const value = entry;
-  //console.log("VALUE: ", value);
+export function handleString(entry: string) {
+  const value = entry; // redundant line of code?
 
   const result = value.split("\n")[0].replace("\r", "").slice(0, -3); // Remove automatically added \r from result string endings, and removes language categories.
 
   return result;
 }
 
-export function handleArrowButtons(e) {
+export function handleArrowButtons(e : PointerEvent) {
 
   if (document.getElementById("arrow-right") === e.target) {
 
@@ -69,7 +77,7 @@ export function renderNewChart() {
       return;
     } else {
       // Display chart logs from our data object timesClicked;
-      const resultChart = new LogChart(timesClicked, ctx);
+      const resultChart = new LogChart({ data: { value: timesClicked }, ctx });
   
       resultChart.destroyLogChart(); // Destroy any potentially existing instance of Chart/Canvas
       resultChart.renderLogChart();
