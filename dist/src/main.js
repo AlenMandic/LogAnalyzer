@@ -1,3 +1,5 @@
+import { LogChart, dummyData } from "./chart.js"; // Chart logic from chart.js
+import { handleDates, handleString } from "./utils.js";
 const fileInput = document.getElementById("log-file");
 const demoExampleNote = document.getElementById("demo-example");
 const errorWarning = document.getElementById("error-warning");
@@ -7,10 +9,6 @@ let dateArray = [];
 export let timesClicked;
 const chartCanvas = document.getElementById("myChart"); // Returns a regular HTML element
 export const ctx = chartCanvas.getContext("2d");
-import { LogChart } from "./chart.js"; // Chart logic from chart.js
-import { handleDates } from "./utils.js";
-import { handleString } from "./utils.js";
-import { dummyData } from "./chart.js";
 errorWarning.style.display = "none";
 fileInput.addEventListener("change", handleLogFile);
 // Display initial dummy graph
@@ -64,7 +62,8 @@ function handleLogFile() {
                 handleDates(dateArray);
                 // Display accurate date range for multiple log files. Capitalize the first letter of the restaurant name
                 if (logFiles.length != 1) {
-                    restaurantName.innerHTML = `Restaurant ${values.split(";")[0][0].toUpperCase() + values.split(";")[0].slice(1)}, ${dateArray[dateArray.length - 1]} - ${dateArray[0]}`;
+                    restaurantName.innerHTML = `Restaurant ${values.split(";")[0][0].toUpperCase() +
+                        values.split(";")[0].slice(1)}, ${dateArray[dateArray.length - 1]} - ${dateArray[0]}`;
                 }
             }
             catch (error) {

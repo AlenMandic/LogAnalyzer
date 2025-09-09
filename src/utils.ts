@@ -2,10 +2,10 @@ import { timesClicked, ctx } from "./main.js";
 import { dummyData, LogChart } from "./chart.js";
 
 const selectChartType = document.getElementById("chartType") as HTMLSelectElement;
-const demoExampleElement = document.getElementById("demo-example");
+const demoExampleElement = document.getElementById("demo-example") as HTMLElement;
 
-const arrowButtonLeft = document.getElementById("arrow-left");
-const arrowButtonRight = document.getElementById("arrow-right");
+const arrowButtonLeft = document.getElementById("arrow-left") as HTMLImageElement;
+const arrowButtonRight = document.getElementById("arrow-right") as HTMLImageElement;
 
 const arrayOfOptions : Array<string> = [];
 let currentPosition = 0;
@@ -29,7 +29,7 @@ export function handleDates(dateList : Array<string>) {
 }
 
 // Handle string operation, extracts every button which was clicked.
-export function handleString(entry: string) {
+export function handleString(entry: string): string {
   const value = entry; // redundant line of code?
 
   const result = value.split("\n")[0].replace("\r", "").slice(0, -3); // Remove automatically added \r from result string endings, and removes language categories.
