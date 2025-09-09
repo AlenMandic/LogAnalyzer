@@ -136,7 +136,7 @@ canvas {
   width: 80px;
   height: 80px;
   border-radius: 10px;
-  border: solid 1.6px white;
+  border: solid 1px black;
   padding: 10px;
   cursor: pointer;
   transition: transform 0.04s ease;

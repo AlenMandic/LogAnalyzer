@@ -1,45 +1,48 @@
-import { timesClicked } from "./main.js";
-import { ctx } from "./main.js";
-import { dummyData } from "./chart.js";
-import { LogChart } from "./chart.js";
+import { timesClicked, ctx } from "./main.js";
+import { dummyData, LogChart } from "./chart.js";
 
-const selectChartType = document.getElementById("chartType");
-const demoExampleElement = document.getElementById("demo-example");
+const selectChartType = document.getElementById("chartType") as HTMLSelectElement;
+const demoExampleElement = document.getElementById("demo-example") as HTMLElement;
 
-const arrowButtonLeft = document.getElementById("arrow-left");
-const arrowButtonRight = document.getElementById("arrow-right");
+const arrowButtonLeft = document.getElementById("arrow-left") as HTMLImageElement;
+const arrowButtonRight = document.getElementById("arrow-right") as HTMLImageElement;
 
-const arrayOfOptions = [];
+const arrayOfOptions : Array<string> = [];
 let currentPosition = 0;
 
-for( let i = 0; i < selectChartType.options.length; i++ ) {
+for( let i = 0; i < (selectChartType).options.length; i++ ) {
   arrayOfOptions.push(selectChartType.options[i].value);
 }
 
 // Sort dates from oldest to newest to get the date range for logs. Uses JS's built in sort algorithm...
-export function handleDates(dateList) {
+export function handleDates(dateList : Array<string>) {
+
   dateList.sort((a, b) => {
-    let c = new Date(a);
-    let d = new Date(b);
-    return c - d;
+
+    const parseDate = (str: string) => {
+      const [day, month, year] = str.split(".").map(Number); // Turns "08.10.2025" into an array of strings(split), then numbers, as map returns an array: [8, 10, 2025]
+      return new Date(year, month - 1, day); // Creates a date object from the variables: Destructured 8 into the variable "day", etc...
+    }
+    
+    return parseDate(a).getTime() - parseDate(b).getTime();
   });
 }
 
 // Handle string operation, extracts every button which was clicked.
-export function handleString(entry) {
-  const value = entry;
-  //console.log("VALUE: ", value);
+export function handleString(entry: string): string {
+  const value = entry; // redundant line of code?
 
   const result = value.split("\n")[0].replace("\r", "").slice(0, -3); // Remove automatically added \r from result string endings, and removes language categories.
 
   return result;
 }
 
-export function handleArrowButtons(e) {
+export function handleArrowButtons(e : PointerEvent) {
 
   if (document.getElementById("arrow-right") === e.target) {
 
       if ( currentPosition >= arrayOfOptions.length - 1 ) currentPosition = -1;
+
       currentPosition += 1;
 
       selectChartType.value = arrayOfOptions[currentPosition]
@@ -49,6 +52,7 @@ export function handleArrowButtons(e) {
   } else {
 
       if ( currentPosition <= 0 ) currentPosition = 5;
+
       currentPosition -= 1;
 
       selectChartType.value = arrayOfOptions[currentPosition]

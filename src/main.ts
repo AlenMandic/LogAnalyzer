@@ -1,31 +1,33 @@
 // Main logic and string manipulation/extraction.
+import { mainDataForChart, ourCanvas } from "../types/types.js";
 
-const fileInput = document.getElementById("log-file");
-const demoExampleNote = document.getElementById("demo-example");
-const errorWarning = document.getElementById("error-warning");
+import { LogChart, dummyData } from "./chart.js"; // Chart logic from chart.js
+import { handleDates, handleString } from "./utils.js";
 
-let restaurantName = document.getElementById("r-name");
-let resultArray = []; // Reset
-let dateArray = [];
+const fileInput = document.getElementById("log-file") as HTMLInputElement;
+const demoExampleNote = document.getElementById("demo-example") as HTMLElement;
+const errorWarning = document.getElementById("error-warning") as HTMLElement;
 
-export let timesClicked;
-export const ctx = document.getElementById("myChart").getContext("2d");
+let restaurantName = document.getElementById("r-name") as HTMLElement;
+let resultArray: Array<string> = []; // Reset
+let dateArray: Array<string> = [];
 
-import { LogChart } from "./chart.js"; // Chart logic from chart.js
-import { handleDates } from "./utils.js";
-import { handleString } from "./utils.js";
-import { dummyData } from "./chart.js";
+export let timesClicked: mainDataForChart;
 
-errorWarning.style.display = "none";
+const chartCanvas = document.getElementById("myChart") as HTMLCanvasElement; // Returns a regular HTML element
+export const ctx = chartCanvas.getContext("2d") as ourCanvas;
 
-fileInput.addEventListener("change", handleLogFile);
+(<HTMLElement>errorWarning).style.display = "none";
+
+(<HTMLInputElement>fileInput).addEventListener("change", handleLogFile);
 
 // Display initial dummy graph
 const demoExample = new LogChart(dummyData, ctx);
-demoExample.renderLogChart(dummyData, ctx);
+demoExample.renderLogChart();
 
 function handleLogFile() {
-  const logFiles = fileInput.files;
+  const logElement = fileInput;
+  const logFiles = logElement.files as FileList;
 
   dateArray = [];
   timesClicked = {};
@@ -49,7 +51,7 @@ function handleLogFile() {
         demoExampleNote.style.display = "none";
         errorWarning.style.display = "none";
 
-        const values = reader.result;
+        const values = reader.result as string;
 
         const amountOfEntries = values.split("bottun;"); // Every button which was clicked.
 
@@ -91,7 +93,10 @@ function handleLogFile() {
 
         // Display accurate date range for multiple log files. Capitalize the first letter of the restaurant name
         if (logFiles.length != 1) {
-          restaurantName.innerHTML = `Restaurant ${values.split(";")[0][0].toUpperCase() + values.split(";")[0].slice(1)}, ${dateArray[dateArray.length - 1]} - ${dateArray[0]}`;
+          restaurantName.innerHTML = `Restaurant ${
+            values.split(";")[0][0].toUpperCase() +
+            values.split(";")[0].slice(1)
+          }, ${dateArray[dateArray.length - 1]} - ${dateArray[0]}`;
         }
       } catch (error) {
         console.error(error);
@@ -101,7 +106,7 @@ function handleLogFile() {
       }
     };
 
-    reader.onerror = () => {
+    reader.onerror = (error) => {
       demoExampleNote.style.display = "block";
 
       // handle errors on reading files
